@@ -80,9 +80,11 @@ function DrowTable(head, data) {
         $("thead tr th").click(function () {
             var $this = $(this);
             $this.toggleClass("w3-ext-sort");
+            $("i").empty();
             var rowId;
             console.log($this.hasClass('w3-ext-sort'));
             if ($this.hasClass('w3-ext-sort')) {
+                $("i").text("keyboard_arrow_up");
                 var thIndex = 0;
                 var curThIndex_1 = null;
                 var sorting_1;
@@ -106,6 +108,7 @@ function DrowTable(head, data) {
                 }
             }
             if (!$this.hasClass('w3-ext-sort')) {
+                $("i").text("keyboard_arrow_down");
                 var thIndex = 0;
                 var curThIndex_2 = null;
                 var sorting_2;

@@ -20,8 +20,15 @@ td {
     width: 100px;
 }
 
+
+/* Иконка сортировки */
+
 .w3-ext-sort-icon {
     font-size: 20px;
+    position: relative;
+    /* Adjust these values accordingly */
+    top: 5px;
+    left: 5px;
 }
 
 

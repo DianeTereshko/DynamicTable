@@ -95,9 +95,11 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
         $("thead tr th").click(function () {
             var $this = $(this);
             $this.toggleClass("w3-ext-sort");
+            $("i").empty();
             let rowId: any;
             console.log($this.hasClass('w3-ext-sort'));
             if ($this.hasClass('w3-ext-sort')) {
+                $("i").text("keyboard_arrow_up");
                 let thIndex = 0;
                 let curThIndex: any = null;
                 let sorting: any;
@@ -123,6 +125,7 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
             }
 
             if (!$this.hasClass('w3-ext-sort')) {
+                $("i").text("keyboard_arrow_down");
                 let thIndex = 0;
                 let curThIndex: any = null;
                 let sorting: any;
