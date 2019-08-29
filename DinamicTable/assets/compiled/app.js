@@ -15,7 +15,7 @@ var data4 = new Row("Maybell Volkman", "Product Web Facilitator", false);
 var data5 = new Row("Zackery Paucek", "Regional Usability Liaison", true);
 var data6 = new Row("Dr. Krystal Wilkinson", "Principal Tactics Planner", false);
 var data7 = new Row("Chanelle McKenzie", "District Solutions Supervisor", true);
-var data8 = new Row("Billy Kunze II", "тип строка", true);
+var data8 = new Row("Billy Kunze II", "Lead Quality Producer", true);
 var data9 = new Row("Eliezer Bailey", "Regional Accountability Executive", false);
 var data10 = new Row("Rickie Fay", "Corporate Configuration Orchestrator", true);
 var data11 = new Row("Kaycee Kub", "Chief Functionality Liaison", true);
@@ -45,7 +45,7 @@ var data34 = new Row("Kenton Cartwright", "Customer Intranet Architect", true);
 var data = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15, data16, data17, data18, data19, data20, data21, data22, data23, data24, data25, data26, data27, data28, data29, data30, data31, data32, data33, data34];
 DrowTable(head, data);
 function DrowTable(head, data) {
-    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th><p>" + head[0] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th><p>" + head[1] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
+    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th class=\"w3-ext-cursor\"><p>" + head[0] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th class=\"w3-ext-cursor\"><p>" + head[1] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
     var tbody = "<tbody></tbody>";
     $("table").append(theader);
     $("table").append(tbody);
@@ -82,7 +82,7 @@ function DrowTable(head, data) {
     var tbodyHtml;
     var rowId;
     $(function () {
-        $('table thead tr th').click(function () {
+        $('table thead tr .w3-ext-cursor').click(function () {
             thIndex = $(this).index();
             if (thIndex != curThIndex) {
                 curThIndex = thIndex;

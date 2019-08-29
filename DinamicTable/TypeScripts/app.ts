@@ -24,7 +24,7 @@ let data4: IRow = new Row("Maybell Volkman", "Product Web Facilitator", false);
 let data5: IRow = new Row("Zackery Paucek", "Regional Usability Liaison", true);
 let data6: IRow = new Row("Dr. Krystal Wilkinson", "Principal Tactics Planner", false);
 let data7: IRow = new Row("Chanelle McKenzie", "District Solutions Supervisor", true);
-let data8: IRow = new Row("Billy Kunze II", "тип строка", true);
+let data8: IRow = new Row("Billy Kunze II", "Lead Quality Producer", true);
 let data9: IRow = new Row("Eliezer Bailey", "Regional Accountability Executive", false);
 let data10: IRow = new Row("Rickie Fay", "Corporate Configuration Orchestrator", true);
 let data11: IRow = new Row("Kaycee Kub", "Chief Functionality Liaison", true);
@@ -58,7 +58,7 @@ DrowTable(head, data);
 
 function DrowTable(head: Array<String>, data: Array<IRow>) {
 
-    let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[0]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[1]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
+    let theader = `<thead scope="col"><tr class="w3-red"><th class="w3-ext-cursor"><p>${head[0]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th class="w3-ext-cursor"><p>${head[1]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
     let tbody = `<tbody></tbody>`;
     $("table").append(theader);
     $("table").append(tbody);
@@ -96,7 +96,7 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
     let tbodyHtml: any;
     let rowId: any;
     $(function () {
-        $('table thead tr th').click(function () {
+        $('table thead tr .w3-ext-cursor').click(function () {
             thIndex = $(this).index();
             if (thIndex != curThIndex) {
                 curThIndex = thIndex;

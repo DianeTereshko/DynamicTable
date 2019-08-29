@@ -33,6 +33,7 @@ td {
 
 .w3-ext-animate-paginator:hover {
     background-color: #626375;
+    cursor: pointer;
 }
 
 
@@ -85,4 +86,8 @@ a.w3-ext-button-animate:active:after {
     margin: 0;
     opacity: 1;
     transition: 0s
+}
+
+.w3-ext-cursor:hover {
+    cursor: pointer;
 }
