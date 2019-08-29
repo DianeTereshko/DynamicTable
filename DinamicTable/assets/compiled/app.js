@@ -45,7 +45,7 @@ var data34 = new Row("Kenton Cartwright", "Customer Intranet Architect", true);
 var data = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15, data16, data17, data18, data19, data20, data21, data22, data23, data24, data25, data26, data27, data28, data29, data30, data31, data32, data33, data34];
 DrowTable(head, data);
 function DrowTable(head, data) {
-    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th class=\"w3-ext-cursor\"><p>" + head[0] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th class=\"w3-ext-cursor\"><p>" + head[1] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
+    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th><p>" + head[0] + "<i class=\"head-name w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th><p>" + head[1] + "<i class=\"head-type w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
     var tbody = "<tbody></tbody>";
     $("table").append(theader);
     $("table").append(tbody);
@@ -77,12 +77,11 @@ function DrowTable(head, data) {
         $pager.insertAfter($table).find('span.page-number:first').addClass('w3-red');
     });
     $(function () {
-        $("thead tr th").click(function () {
+        $("thead tr th p i").click(function () {
             var $this = $(this);
             $this.toggleClass("w3-ext-sort");
             $("i").empty();
             var rowId;
-            console.log($this.hasClass('w3-ext-sort'));
             if ($this.hasClass('w3-ext-sort')) {
                 $("i").text("keyboard_arrow_up");
                 var thIndex = 0;
@@ -99,7 +98,6 @@ function DrowTable(head, data) {
                         sorting_1.push($(this).children('td').eq(curThIndex_1).html() + ', ' + $(this).index());
                     });
                     sorting_1 = sorting_1.sort();
-                    console.log("sort");
                     for (var sortingIndex = 0; sortingIndex < sorting_1.length; sortingIndex++) {
                         rowId_1 = parseInt(sorting_1[sortingIndex].split(', ')[1]);
                         tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId_1)[0].outerHTML;
@@ -123,7 +121,6 @@ function DrowTable(head, data) {
                     });
                     sorting_2 = sorting_2.sort();
                     sorting_2 = sorting_2.reverse();
-                    console.log("desc sort");
                     for (var sortingIndex = 0; sortingIndex < sorting_2.length; sortingIndex++) {
                         rowId = parseInt(sorting_2[sortingIndex].split(', ')[1]);
                         tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;

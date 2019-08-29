@@ -58,7 +58,7 @@ DrowTable(head, data);
 
 function DrowTable(head: Array<String>, data: Array<IRow>) {
 
-    let theader = `<thead scope="col"><tr class="w3-red"><th class="w3-ext-cursor"><p>${head[0]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th class="w3-ext-cursor"><p>${head[1]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
+    let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[0]}<i class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[1]}<i class="head-type w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
     let tbody = `<tbody></tbody>`;
     $("table").append(theader);
     $("table").append(tbody);
@@ -92,14 +92,14 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
 
 
     $(function () {
-        $("thead tr th").click(function () {
+        $("thead tr th p i").click(function () {
             var $this = $(this);
             $this.toggleClass("w3-ext-sort");
             $("i").empty();
             let rowId: any;
-            console.log($this.hasClass('w3-ext-sort'));
             if ($this.hasClass('w3-ext-sort')) {
                 $("i").text("keyboard_arrow_up");
+                
                 let thIndex = 0;
                 let curThIndex: any = null;
                 let sorting: any;
@@ -115,7 +115,6 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
                     });
 
                     sorting = sorting.sort();
-                    console.log("sort");
                     for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
                         rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
                         tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
@@ -141,7 +140,6 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
 
                     sorting = sorting.sort();
                     sorting = sorting.reverse();
-                    console.log("desc sort");
                     for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
                         rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
                         tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
