@@ -58,7 +58,7 @@ DrowTable(head, data);
 
 function DrowTable(head: Array<String>, data: Array<IRow>) {
 
-    let theader = `<thead scope="col"><tr class="w3-red"><th id="head-name"class="w3-ext-cursor"><p>${head[0]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th class="w3-ext-cursor"><p>${head[1]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
+    let theader = `<thead scope="col"><tr class="w3-red"><th class="w3-ext-cursor"><p>${head[0]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th class="w3-ext-cursor"><p>${head[1]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
     let tbody = `<tbody></tbody>`;
     $("table").append(theader);
     $("table").append(tbody);
@@ -92,7 +92,7 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
 
 
     $(function () {
-        $("#head-name").click(function () {
+        $("thead tr th").click(function () {
             var $this = $(this);
             $this.toggleClass("w3-ext-sort");
             let rowId: any;
