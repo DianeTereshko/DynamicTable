@@ -76,6 +76,35 @@ function DrowTable(head, data) {
         }
         $pager.insertAfter($table).find('span.page-number:first').addClass('w3-red');
     });
+    // Сортировка по возрастанию
+    // let thIndex = 0;
+    // let curThIndex: any = null;
+    // let sorting: any;
+    // let tbodyHtml: any;
+    // let rowId: any;
+    // $(function () {
+    //     $('table thead tr .w3-ext-cursor').click(function () {
+    //         thIndex = $(this).index();
+    //         if (thIndex != curThIndex) {
+    //             curThIndex = thIndex;
+    //             sorting = [];
+    //             tbodyHtml = null;
+    //             $('table tbody tr').each(function () {
+    //                 sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
+    //             });
+    //             sorting = sorting.sort();
+    //             sortIt();
+    //         }
+    //     });
+    // })
+    // function sortIt() {
+    //     for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
+    //         rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
+    //         tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
+    //     }
+    //     $('table tbody').html(tbodyHtml);
+    // }
+    // Сортировка по убыванию
     var thIndex = 0;
     var curThIndex = null;
     var sorting;
@@ -92,6 +121,7 @@ function DrowTable(head, data) {
                     sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
                 });
                 sorting = sorting.sort();
+                sorting = sorting.reverse();
                 sortIt();
             }
         });
