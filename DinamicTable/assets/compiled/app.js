@@ -45,7 +45,7 @@ var data34 = new Row("Kenton Cartwright", "Customer Intranet Architect", true);
 var data = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15, data16, data17, data18, data19, data20, data21, data22, data23, data24, data25, data26, data27, data28, data29, data30, data31, data32, data33, data34];
 DrowTable(head, data);
 function DrowTable(head, data) {
-    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th class=\"w3-ext-cursor\"><p>" + head[0] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th class=\"w3-ext-cursor\"><p>" + head[1] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
+    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th class=\"w3-ext-sort w3-ext-cursor\"><p>" + head[0] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th class=\"w3-ext-sort w3-ext-cursor\"><p>" + head[1] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
     var tbody = "<tbody></tbody>";
     $("table").append(theader);
     $("table").append(tbody);
@@ -76,42 +76,20 @@ function DrowTable(head, data) {
         }
         $pager.insertAfter($table).find('span.page-number:first').addClass('w3-red');
     });
-    // Сортировка по возрастанию
-    // let thIndex = 0;
-    // let curThIndex: any = null;
-    // let sorting: any;
-    // let tbodyHtml: any;
-    // let rowId: any;
-    // $(function () {
-    //     $('table thead tr .w3-ext-cursor').click(function () {
-    //         thIndex = $(this).index();
-    //         if (thIndex != curThIndex) {
-    //             curThIndex = thIndex;
-    //             sorting = [];
-    //             tbodyHtml = null;
-    //             $('table tbody tr').each(function () {
-    //                 sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
-    //             });
-    //             sorting = sorting.sort();
-    //             sortIt();
-    //         }
-    //     });
-    // })
-    // function sortIt() {
-    //     for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
-    //         rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
-    //         tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
-    //     }
-    //     $('table tbody').html(tbodyHtml);
-    // }
-    // Сортировка по убыванию
     var thIndex = 0;
     var curThIndex = null;
     var sorting;
     var tbodyHtml;
     var rowId;
+    // Сортировка по возрастанию
+    // function sort() {
+    // let thIndex = 0;
+    // let curThIndex: any = null;
+    // let sorting: any;
+    // let tbodyHtml: any;
+    // let rowId: any;
     $(function () {
-        $('table thead tr .w3-ext-cursor').click(function () {
+        $('table thead tr .w3-ext-sort').click(function () {
             thIndex = $(this).index();
             if (thIndex != curThIndex) {
                 curThIndex = thIndex;
@@ -121,7 +99,6 @@ function DrowTable(head, data) {
                     sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
                 });
                 sorting = sorting.sort();
-                sorting = sorting.reverse();
                 sortIt();
             }
         });
@@ -133,6 +110,38 @@ function DrowTable(head, data) {
         }
         $('table tbody').html(tbodyHtml);
     }
+    // }
+    // Сортировка по убыванию
+    // function sortByDescending() {
+    // let thIndex = 0;
+    // let curThIndex: any = null;
+    // let sorting: any;
+    // let tbodyHtml: any;
+    // let rowId: any;
+    $(function () {
+        $('table thead tr .w3-ext-cursor .w3-ext-sort-by-desc').click(function () {
+            thIndex = $(this).index();
+            if (thIndex != curThIndex) {
+                curThIndex = thIndex;
+                sorting = [];
+                tbodyHtml = null;
+                $('table tbody tr').each(function () {
+                    sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
+                });
+                sorting = sorting.sort();
+                sorting = sorting.reverse();
+                sortItDesc();
+            }
+        });
+    });
+    function sortItDesc() {
+        for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
+            rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
+            tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
+        }
+        $('table tbody').html(tbodyHtml);
+    }
+    // }
 }
 function SendToMVC(event) {
     console.log(event);

@@ -58,7 +58,7 @@ DrowTable(head, data);
 
 function DrowTable(head: Array<String>, data: Array<IRow>) {
 
-    let theader = `<thead scope="col"><tr class="w3-red"><th class="w3-ext-cursor"><p>${head[0]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th class="w3-ext-cursor"><p>${head[1]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
+    let theader = `<thead scope="col"><tr class="w3-red"><th class="w3-ext-sort w3-ext-cursor"><p>${head[0]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th class="w3-ext-sort w3-ext-cursor"><p>${head[1]}<i class="material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
     let tbody = `<tbody></tbody>`;
     $("table").append(theader);
     $("table").append(tbody);
@@ -90,66 +90,77 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
         $pager.insertAfter($table).find('span.page-number:first').addClass('w3-red');
     });
 
-    // Сортировка по возрастанию
-    // let thIndex = 0;
-    // let curThIndex: any = null;
-    // let sorting: any;
-    // let tbodyHtml: any;
-    // let rowId: any;
-    // $(function () {
-    //     $('table thead tr .w3-ext-cursor').click(function () {
-    //         thIndex = $(this).index();
-    //         if (thIndex != curThIndex) {
-    //             curThIndex = thIndex;
-    //             sorting = [];
-    //             tbodyHtml = null;
-    //             $('table tbody tr').each(function () {
-    //                 sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
-    //             });
-
-    //             sorting = sorting.sort();
-    //             sortIt();
-    //         }
-    //     });
-    // })
-    // function sortIt() {
-    //     for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
-    //         rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
-    //         tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
-    //     }
-    //     $('table tbody').html(tbodyHtml);
-    // }
-
-    // Сортировка по убыванию
     let thIndex = 0;
     let curThIndex: any = null;
     let sorting: any;
     let tbodyHtml: any;
     let rowId: any;
-    $(function () {
-        $('table thead tr .w3-ext-cursor').click(function () {
-            thIndex = $(this).index();
-            if (thIndex != curThIndex) {
-                curThIndex = thIndex;
-                sorting = [];
-                tbodyHtml = null;
-                $('table tbody tr').each(function () {
-                    sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
-                });
+    // Сортировка по возрастанию
+    // function sort() {
+        // let thIndex = 0;
+        // let curThIndex: any = null;
+        // let sorting: any;
+        // let tbodyHtml: any;
+        // let rowId: any;
+        $(function () {
+            $('table thead tr .w3-ext-sort').click(function () {
+                thIndex = $(this).index();
+                if (thIndex != curThIndex) {
+                    curThIndex = thIndex;
+                    sorting = [];
+                    tbodyHtml = null;
+                    $('table tbody tr').each(function () {
+                        sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
+                    });
 
-                sorting = sorting.sort();
-                sorting = sorting.reverse();
-                sortIt();
+                    sorting = sorting.sort();
+                    sortIt();
+                }
+            });
+        })
+        function sortIt() {
+            for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
+                rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
+                tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
             }
-        });
-    })
-    function sortIt() {
-        for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
-            rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
-            tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
+            $('table tbody').html(tbodyHtml);
         }
-        $('table tbody').html(tbodyHtml);
-    }
+    // }
+
+
+    // Сортировка по убыванию
+    // function sortByDescending() {
+        // let thIndex = 0;
+        // let curThIndex: any = null;
+        // let sorting: any;
+        // let tbodyHtml: any;
+        // let rowId: any;
+        $(function () {
+            $('table thead tr .w3-ext-cursor .w3-ext-sort-by-desc').click(function () {
+                thIndex = $(this).index();
+                if (thIndex != curThIndex) {
+                    curThIndex = thIndex;
+                    sorting = [];
+                    tbodyHtml = null;
+                    $('table tbody tr').each(function () {
+                        sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
+                    });
+
+                    sorting = sorting.sort();
+                    sorting = sorting.reverse();
+                    sortItDesc();
+                }
+            });
+        })
+        function sortItDesc() {
+            for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
+                rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
+                tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
+            }
+            $('table tbody').html(tbodyHtml);
+        }
+    // }
+
 }
 
 function SendToMVC(event: any) {
