@@ -58,7 +58,7 @@ DrowTable(head, data);
 
 function DrowTable(head: Array<String>, data: Array<IRow>) {
 
-    let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[0]}<i class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[1]}<i class="head-type w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
+    let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[0]}<i id="head-name" class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[1]}<i id="head-type" class="head-type w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
     let tbody = `<tbody></tbody>`;
     $("table").append(theader);
     $("table").append(tbody);
@@ -99,7 +99,12 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
             let rowId: any;
             if ($this.hasClass('w3-ext-sort')) {
                 $("i").text("keyboard_arrow_up");
-                
+                if ($this.hasClass("head-name")) {
+                    $("#head-type").text("unfold_more");
+                }
+                if ($this.hasClass("head-type")) {
+                    $("#head-name").text("unfold_more");
+                }
                 let thIndex = 0;
                 let curThIndex: any = null;
                 let sorting: any;
@@ -125,6 +130,12 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
 
             if (!$this.hasClass('w3-ext-sort')) {
                 $("i").text("keyboard_arrow_down");
+                if ($this.hasClass("head-name")) {
+                    $("#head-type").text("unfold_more");
+                }
+                if ($this.hasClass("head-type")) {
+                    $("#head-name").text("unfold_more");
+                }
                 let thIndex = 0;
                 let curThIndex: any = null;
                 let sorting: any;
