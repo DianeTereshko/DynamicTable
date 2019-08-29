@@ -1,0 +1,88 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+html {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+td {
+    width: 100px;
+}
+
+.w3-ext-sort-icon {
+    font-size: 20px;
+}
+
+
+/*Анимация пагинатора*/
+
+.w3-ext-animate-paginator {
+    transition: background-color 1s ease;
+}
+
+.w3-ext-animate-paginator:hover {
+    background-color: #626375;
+}
+
+
+/* Анимация кнопки */
+
+a {
+    text-decoration: none;
+    color: white;
+    border: 3px solid white;
+    position: relative;
+    transition: all 3s;
+    overflow: hidden;
+}
+
+a.w3-ext-button-animate:before {
+    content: 'ДА!';
+    color: white;
+    background-color: #F44336;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transform: translateY(-100%);
+    transition: all .5s;
+}
+
+a.w3-ext-button-animate:hover:before {
+    transform: translateY(0);
+}
+
+a.w3-ext-button-animate:after {
+    content: "";
+    background: #626375;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+a.w3-ext-button-animate:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
