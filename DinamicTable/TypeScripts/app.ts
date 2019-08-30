@@ -16,6 +16,14 @@ class Row implements IRow {
     }
 }
 
+interface IService {
+    DrowTable(head: Array<String>, data: Array<IRow>): void;
+
+
+}
+
+
+
 let head: Array<string> = ["Имя", "Тип", "Видимость"];
 let data1: IRow = new Row("Shannon Breitenberg", "Direct Tactics Producer", true);
 let data2: IRow = new Row("Haley Schiller", "Central Applications Supervisor", true);
@@ -53,123 +61,125 @@ let data33: IRow = new Row("Austen Marks", "Chief Response Consultant", false);
 let data34: IRow = new Row("Kenton Cartwright", "Customer Intranet Architect", true);
 let data: Array<IRow> = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15, data16, data17, data18, data19, data20, data21, data22, data23, data24, data25, data26, data27, data28, data29, data30, data31, data32, data33, data34]
 
-DrowTable(head, data);
-
-
-function DrowTable(head: Array<String>, data: Array<IRow>) {
-
-    let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[0]}<i id="head-name" class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[1]}<i id="head-type" class="head-type w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
-    let tbody = `<tbody></tbody>`;
-    $("table").append(theader);
-    $("table").append(tbody);
-    for (let row of data) {
-        let newrow = `<tr><td><p contenteditable id="name">${row.name}</p></td><td><p id="type" contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToMVC(event)" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
-        $("table").prepend(newrow);
-    }
-
-    $('table.w3-ext-paginated').each(function () {
-        let currentPage = 0;
-        let numPerPage = 10;
-        let $table = $(this);
-        $table.bind('repaginate', function () {
-            $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-        });
-        $table.trigger('repaginate');
-        let numRows = $table.find('tbody tr').length;
-        let numPages = Math.ceil(numRows / numPerPage);
-        let $pager = $('<div class="w3-bar w3-center"></div>');
-        for (let page = 0; page < numPages; page++) {
-            $('<a class="w3-button w3-ext-animate-paginator"></a>').text(page + 1).bind('click', {
-                newPage: page
-            }, function (event) {
-                currentPage = event.data['newPage'];
-                $table.trigger('repaginate');
-                $(this).addClass('w3-red').siblings().removeClass('w3-red');
-            }).appendTo($pager).addClass('clickable');
+class Service implements IService {
+    DrowTable(head: Array<String>, data: Array<IRow>): void {
+        let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[0]}<i id="head-name" class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[1]}<i id="head-type" class="head-type w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
+        let tbody = `<tbody></tbody>`;
+        $("table").append(theader);
+        $("table").append(tbody);
+        for (let row of data) {
+            let newrow = `<tr><td><p contenteditable id="name">${row.name}</p></td><td><p id="type" contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToMVC(event)" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
+            $("table").prepend(newrow);
         }
-        $pager.insertAfter($table).find('span.page-number:first').addClass('w3-red');
-    });
 
-
-    $(function () {
-        $("thead tr th p i").click(function () {
-            var $this = $(this);
-            $this.toggleClass("w3-ext-sort");
-            $("i").empty();
-            let rowId: any;
-            if ($this.hasClass('w3-ext-sort')) {
-                $("i").text("keyboard_arrow_up");
-                if ($this.hasClass("head-name")) {
-                    $("#head-type").text("unfold_more");
-                }
-                if ($this.hasClass("head-type")) {
-                    $("#head-name").text("unfold_more");
-                }
-                let thIndex = 0;
-                let curThIndex: any = null;
-                let sorting: any;
-                let tbodyHtml: any;
-                let rowId: any;
-                thIndex = $(this).index();
-                if (thIndex != curThIndex) {
-                    curThIndex = thIndex;
-                    sorting = [];
-                    tbodyHtml = null;
-                    $('table tbody tr').each(function () {
-                        sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
-                    });
-
-                    sorting = sorting.sort();
-                    for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
-                        rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
-                        tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
-                    }
-                    $('table tbody').html(tbodyHtml);
-                }
+        $('table.w3-ext-paginated').each(function () {
+            let currentPage = 0;
+            let numPerPage = 10;
+            let $table = $(this);
+            $table.bind('repaginate', function () {
+                $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+            });
+            $table.trigger('repaginate');
+            let numRows = $table.find('tbody tr').length;
+            let numPages = Math.ceil(numRows / numPerPage);
+            let $pager = $('<div class="w3-bar w3-center"></div>');
+            for (let page = 0; page < numPages; page++) {
+                $('<a class="w3-button w3-ext-animate-paginator"></a>').text(page + 1).bind('click', {
+                    newPage: page
+                }, function (event) {
+                    currentPage = event.data['newPage'];
+                    $table.trigger('repaginate');
+                    $(this).addClass('w3-red').siblings().removeClass('w3-red');
+                }).appendTo($pager).addClass('clickable');
             }
-
-            if (!$this.hasClass('w3-ext-sort')) {
-                $("i").text("keyboard_arrow_down");
-                if ($this.hasClass("head-name")) {
-                    $("#head-type").text("unfold_more");
-                }
-                if ($this.hasClass("head-type")) {
-                    $("#head-name").text("unfold_more");
-                }
-                let thIndex = 0;
-                let curThIndex: any = null;
-                let sorting: any;
-                let tbodyHtml: any;
-                thIndex = $(this).index();
-                if (thIndex != curThIndex) {
-                    curThIndex = thIndex;
-                    sorting = [];
-                    tbodyHtml = null;
-                    $('table tbody tr').each(function () {
-                        sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
-                    });
-
-                    sorting = sorting.sort();
-                    sorting = sorting.reverse();
-                    for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
-                        rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
-                        tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
-                    }
-                    $('table tbody').html(tbodyHtml);
-                }
-            }
+            $pager.insertAfter($table).find('span.page-number:first').addClass('w3-red');
         });
-    })
-}
 
-function SendToMVC(event: any) {
+
+        $(function () {
+            $("thead tr th p i").click(function () {
+                var $this = $(this);
+                $this.toggleClass("w3-ext-sort");
+                $("i").empty();
+                let rowId: any;
+                if ($this.hasClass('w3-ext-sort')) {
+                    $("i").text("keyboard_arrow_up");
+                    if ($this.hasClass("head-name")) {
+                        $("#head-type").text("unfold_more");
+                    }
+                    if ($this.hasClass("head-type")) {
+                        $("#head-name").text("unfold_more");
+                    }
+                    let thIndex = 0;
+                    let curThIndex: any = null;
+                    let sorting: any;
+                    let tbodyHtml: any;
+                    let rowId: any;
+                    thIndex = $(this).index();
+                    if (thIndex != curThIndex) {
+                        curThIndex = thIndex;
+                        sorting = [];
+                        tbodyHtml = null;
+                        $('table tbody tr').each(function () {
+                            sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
+                        });
+
+                        sorting = sorting.sort();
+                        for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
+                            rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
+                            tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
+                        }
+                        $('table tbody').html(tbodyHtml);
+                    }
+                }
+
+                if (!$this.hasClass('w3-ext-sort')) {
+                    $("i").text("keyboard_arrow_down");
+                    if ($this.hasClass("head-name")) {
+                        $("#head-type").text("unfold_more");
+                    }
+                    if ($this.hasClass("head-type")) {
+                        $("#head-name").text("unfold_more");
+                    }
+                    let thIndex = 0;
+                    let curThIndex: any = null;
+                    let sorting: any;
+                    let tbodyHtml: any;
+                    thIndex = $(this).index();
+                    if (thIndex != curThIndex) {
+                        curThIndex = thIndex;
+                        sorting = [];
+                        tbodyHtml = null;
+                        $('table tbody tr').each(function () {
+                            sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
+                        });
+
+                        sorting = sorting.sort();
+                        sorting = sorting.reverse();
+                        for (var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++) {
+                            rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
+                            tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
+                        }
+                        $('table tbody').html(tbodyHtml);
+                    }
+                }
+            });
+        })
+    };
+
+
+
+}
+let service: IService = new Service();
+service.DrowTable(head, data);
+
+
+function SendToMVC(event: any): void {
     console.log(event);
     let newname: string = $("#name").text();
     let newtype: string = $("#type").text();
     let newisvisible = $("#isvisible").text();
     console.log(`Новое название: ${newname}, Новый тип: ${newtype}, Новая видимость: ${newisvisible}`);
     console.log("Данные отправлены на сервер по Ajax");
-}
-
-
+};
 
