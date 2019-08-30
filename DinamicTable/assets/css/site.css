@@ -23,12 +23,18 @@ td {
 
 /* Иконка сортировки */
 
-.w3-ext-sort-icon {
+i.w3-ext-sort-icon {
     font-size: 20px;
     position: relative;
     /* Adjust these values accordingly */
     top: 5px;
     left: 5px;
+    color: whitesmoke;
+    transition: color 5s ease .0s;
+}
+
+i.w3-ext-sort-icon:hover {
+    color: rgb(190, 93, 174);
 }
 
 
