@@ -48,13 +48,13 @@ var Service = /** @class */ (function () {
     function Service() {
     }
     Service.prototype.DrowTable = function (head, data) {
-        var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th><p>" + head[0] + "<i id=\"head-name\" class=\"head-name w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th><p>" + head[1] + "<i id=\"head-type\" class=\"head-type w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
+        var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th><p>" + head[1] + "<i id=\"head-name\" class=\"head-name w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th><p>" + head[2] + "<i id=\"head-type\" class=\"head-type w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[3] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
         var tbody = "<tbody></tbody>";
         $("table").append(theader);
         $("table").append(tbody);
         for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
             var row = data_1[_i];
-            var newrow = "<tr><td><p contenteditable id=\"name\">" + row.name + "</p></td><td><p id=\"type\" contenteditable>" + row.type + "</p></td><td><select><option value=\"" + row.isvisble + "\">" + row.isvisble + "</option><option id=isvisible value=\"" + !row.isvisble + "\">" + !row.isvisble + "</option></select></td><td><a href=\"#\" onclick=\"SendToMVC(event)\" class=\"w3-ext-button-animate w3-button w3-small\">\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C</a></td></tr>";
+            var newrow = "<tr><td><p contenteditable id=\"" + row.id + "name\">" + row.name + "</p></td><td><p contenteditable id=\"" + row.id + "type\">" + row.type + "</p></td><td><select><option value=\"" + row.isvisble + "\">" + row.isvisble + "</option><option value=\"" + !row.isvisble + "\">" + !row.isvisble + "</option></select></td><td><a href=\"#\" onclick=\"SendToASPCore(" + row.id + ")\" class=\"w3-ext-button-animate w3-button w3-small\">\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C</a></td></tr>";
             $("table").prepend(newrow);
         }
         $('table.w3-ext-paginated').each(function () {
@@ -151,12 +151,12 @@ var Service = /** @class */ (function () {
 }());
 var service = new Service();
 service.DrowTable(head, data);
-function SendToMVC(event) {
-    console.log(event);
-    var newname = $("#name").text();
-    var newtype = $("#type").text();
-    var newisvisible = $("#isvisible").text();
-    console.log("\u041D\u043E\u0432\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435: " + newname + ", \u041D\u043E\u0432\u044B\u0439 \u0442\u0438\u043F: " + newtype + ", \u041D\u043E\u0432\u0430\u044F \u0432\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C: " + newisvisible);
-    console.log("Данные отправлены на сервер по Ajax");
+function SendToASPCore(currentrowid) {
+    console.log("id \u0437\u0430\u043F\u0438\u0441\u0438:" + currentrowid);
+    console.log("Новое название:");
+    console.log($("#" + currentrowid + "name").text());
+    console.log("Новый тип:");
+    console.log($("#" + currentrowid + "type").text());
+    console.log("Данные отправлены в ASP.NET Core по Ajax");
 }
 ;

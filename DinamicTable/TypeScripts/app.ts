@@ -21,11 +21,7 @@ class Row implements IRow {
 
 interface IService {
     DrowTable(head: Array<String>, data: Array<IRow>): void;
-
-
 }
-
-
 
 let head: Array<any> = ["Имя", "Тип", "Видимость"];
 let data1: IRow = new Row(1, "Shannon Breitenberg", "Direct Tactics Producer", true);
@@ -66,12 +62,12 @@ let data: Array<IRow> = [data1, data2, data3, data4, data5, data6, data7, data8,
 
 class Service implements IService {
     DrowTable(head: Array<String>, data: Array<IRow>): void {
-        let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[0]}<i id="head-name" class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[1]}<i id="head-type" class="head-type w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[2]}</th><th>Действия</th></tr></thead>`;
+        let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[1]}<i id="head-name" class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[2]}<i id="head-type" class="head-type w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th>${head[3]}</th><th>Действия</th></tr></thead>`;
         let tbody = `<tbody></tbody>`;
         $("table").append(theader);
         $("table").append(tbody);
         for (let row of data) {
-            let newrow = `<tr><td><p contenteditable id="name">${row.name}</p></td><td><p id="type" contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToMVC(event)" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
+            let newrow = `<tr><td><p contenteditable id="${row.id}name">${row.name}</p></td><td><p contenteditable id="${row.id}type">${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToASPCore(${row.id})" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
             $("table").prepend(newrow);
         }
 
@@ -176,14 +172,12 @@ class Service implements IService {
 let service: IService = new Service();
 service.DrowTable(head, data);
 
-
-function SendToMVC(event: any): void {
-    console.log(event);
-    
-    let newname: string = $("#name").text();
-    let newtype: string = $("#type").text();
-    let newisvisible = $("#isvisible").text();
-    console.log(`Новое название: ${newname}, Новый тип: ${newtype}, Новая видимость: ${newisvisible}`);
-    console.log("Данные отправлены на сервер по Ajax");
+function SendToASPCore(currentrowid: any): void {
+    console.log(`id записи:${currentrowid}`);
+    console.log("Новое название:");
+    console.log($(`#${currentrowid}name`).text());
+    console.log("Новый тип:")
+    console.log($(`#${currentrowid}type`).text());
+    console.log("Данные отправлены в ASP.NET Core по Ajax");
 };
 
