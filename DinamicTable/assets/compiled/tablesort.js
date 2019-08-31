@@ -52,7 +52,9 @@ function DrowTable(head, data) {
     $("table").append(tbody);
     for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
         var row = data_1[_i];
-        var newrow = "<tr><td><p contenteditable>" + row.name + "</p></td><td><p contenteditable>" + row.type + "</p></td><td><select><option value=\"" + row.isvisble + "\">" + row.isvisble + "</option><option id=isvisible value=\"" + !row.isvisble + "\">" + !row.isvisble + "</option></select></td><td><a href=\"#\" onclick=\"SendToASPCore(event)\" class=\"w3-ext-button-animate w3-button w3-small\">\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C</a></td></tr>";
+        var newrow = "<tr><td><p contenteditable>" + row.name + "</p></td><td><p contenteditable>" + row.type + "</p></td><td><select><option value=\"" + row.isvisble + "\">" + row.isvisble + "</option><option id=isvisible value=\"" + !row.isvisble + "\">" + !row.isvisble + "</option></select></td><td><a href=\"#\" onclick=\"SendToASPCore()\" class=\"w3-ext-button-animate w3-button w3-small\">\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C</a></td></tr>";
+        // Если нужны уникальные id для того чтобы получить новые значения ячеек то включить эту строку (id будут уникальные но сортировка работать не будет))
+        // let newrow = `<tr><td><p id="${row.id}name" contenteditable>${row.name}</p></td><td><p id="${row.id}type" contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToASPCore(${row.id})" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
         $("table").prepend(newrow);
     }
     $('table.w3-ext-paginated').each(function () {

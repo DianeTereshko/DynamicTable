@@ -70,7 +70,9 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
     $("table").append(theader);
     $("table").append(tbody);
     for (let row of data) {
-        let newrow = `<tr><td><p contenteditable>${row.name}</p></td><td><p contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToASPCore(event)" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
+        let newrow = `<tr><td><p contenteditable>${row.name}</p></td><td><p contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToASPCore()" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
+        // Если нужны уникальные id для того чтобы получить новые значения ячеек то включить эту строку (id будут уникальные но сортировка работать не будет))
+        // let newrow = `<tr><td><p id="${row.id}name" contenteditable>${row.name}</p></td><td><p id="${row.id}type" contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToASPCore(${row.id})" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
         $("table").prepend(newrow);
     }
 
