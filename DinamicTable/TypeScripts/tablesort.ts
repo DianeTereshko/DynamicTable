@@ -70,7 +70,7 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
     $("table").append(theader);
     $("table").append(tbody);
     for (let row of data) {
-        let newrow = `<tr><td><p contenteditable id="name">${row.name}</p></td><td><p id="type" contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToASPCore(event)" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
+        let newrow = `<tr><td><p contenteditable>${row.name}</p></td><td><p contenteditable>${row.type}</p></td><td><select><option value="${row.isvisble}">${row.isvisble}</option><option id=isvisible value="${!row.isvisble}">${!row.isvisble}</option></select></td><td><a href="#" onclick="SendToASPCore(event)" class="w3-ext-button-animate w3-button w3-small">Сохранить</a></td></tr>`;
         $("table").prepend(newrow);
     }
 
@@ -101,15 +101,15 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
 $("thead tr th p i").click(function () {
     if ($(this).hasClass("switch"))
     {
-        $("i").empty();
-        $("i").text("keyboard_arrow_up");
+        $("#head-name").empty();
+        $("#head-name").text("keyboard_arrow_up");
         sort();
         // console.log($(this).hasClass("switch"));
     }
     if (!$(this).hasClass("switch"))
     {     
-        $("i").empty();
-        $("i").text("keyboard_arrow_down");
+        $("#head-name").empty();
+        $("#head-name").text("keyboard_arrow_down");
         sortbydesc();
         // console.log($(this).hasClass("switch"));   
     }

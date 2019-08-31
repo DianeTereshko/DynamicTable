@@ -52,7 +52,7 @@ function DrowTable(head, data) {
     $("table").append(tbody);
     for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
         var row = data_1[_i];
-        var newrow = "<tr><td><p contenteditable id=\"name\">" + row.name + "</p></td><td><p id=\"type\" contenteditable>" + row.type + "</p></td><td><select><option value=\"" + row.isvisble + "\">" + row.isvisble + "</option><option id=isvisible value=\"" + !row.isvisble + "\">" + !row.isvisble + "</option></select></td><td><a href=\"#\" onclick=\"SendToASPCore(event)\" class=\"w3-ext-button-animate w3-button w3-small\">\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C</a></td></tr>";
+        var newrow = "<tr><td><p contenteditable>" + row.name + "</p></td><td><p contenteditable>" + row.type + "</p></td><td><select><option value=\"" + row.isvisble + "\">" + row.isvisble + "</option><option id=isvisible value=\"" + !row.isvisble + "\">" + !row.isvisble + "</option></select></td><td><a href=\"#\" onclick=\"SendToASPCore(event)\" class=\"w3-ext-button-animate w3-button w3-small\">\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C</a></td></tr>";
         $("table").prepend(newrow);
     }
     $('table.w3-ext-paginated').each(function () {
@@ -80,14 +80,14 @@ function DrowTable(head, data) {
 }
 $("thead tr th p i").click(function () {
     if ($(this).hasClass("switch")) {
-        $("i").empty();
-        $("i").text("keyboard_arrow_up");
+        $("#head-name").empty();
+        $("#head-name").text("keyboard_arrow_up");
         sort();
         // console.log($(this).hasClass("switch"));
     }
     if (!$(this).hasClass("switch")) {
-        $("i").empty();
-        $("i").text("keyboard_arrow_down");
+        $("#head-name").empty();
+        $("#head-name").text("keyboard_arrow_down");
         sortbydesc();
         // console.log($(this).hasClass("switch"));   
     }
