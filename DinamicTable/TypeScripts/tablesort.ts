@@ -65,7 +65,7 @@ DrowTable(head, data);
 
 function DrowTable(head: Array<String>, data: Array<IRow>) {
 
-    let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[1]}<i id="head-name" class="head-name w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[2]}</p></th><th>${head[3]}</th><th>Action</th></tr></thead>`;
+    let theader = `<thead scope="col"><tr class="w3-red"><th><p>${head[1]}<i id="head-name" class="w3-ext-cursor material-icons w3-ext-sort-icon">unfold_more</i></p></th><th><p>${head[2]}</p></th><th>${head[3]}</th><th>Action</th></tr></thead>`;
     let tbody = `<tbody></tbody>`;
     $("table").append(theader);
     $("table").append(tbody);
@@ -100,7 +100,7 @@ function DrowTable(head: Array<String>, data: Array<IRow>) {
     });
 }
 
-$("thead tr th p i").click(function () {
+$("#head-name").click(function () {
     if ($(this).hasClass("switch"))
     {
         $("#head-name").empty();
@@ -115,10 +115,8 @@ $("thead tr th p i").click(function () {
         sortbydesc();
         // console.log($(this).hasClass("switch"));   
     }
-    $(this).toggleClass("switch");
-    
+    $(this).toggleClass("switch");  
 });
-
 
 function sort() {
     let thIndex = 0;
