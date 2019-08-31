@@ -45,7 +45,7 @@ var data34 = new Row("Kenton Cartwright", "Customer Intranet Architect", true);
 var data = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15, data16, data17, data18, data19, data20, data21, data22, data23, data24, data25, data26, data27, data28, data29, data30, data31, data32, data33, data34];
 DrowTable(head, data);
 function DrowTable(head, data) {
-    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th><p>" + head[1] + "<i id=\"head-name\" class=\"head-name w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th><p>" + head[1] + "<i class=\"material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
+    var theader = "<thead scope=\"col\"><tr class=\"w3-red\"><th><p>" + head[1] + "<i id=\"head-name\" class=\"head-name w3-ext-cursor material-icons w3-ext-sort-icon\">unfold_more</i></p></th><th><p>" + head[1] + "</p></th><th>" + head[2] + "</th><th>\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F</th></tr></thead>";
     var tbody = "<tbody></tbody>";
     $("table").append(theader);
     $("table").append(tbody);
@@ -77,12 +77,19 @@ function DrowTable(head, data) {
         $pager.insertAfter($table).find('span.page-number:first').addClass('w3-red');
     });
 }
+$("#my-button").on("click", function () {
+    // sort();
+});
 $("thead tr th p i").click(function () {
     if ($(this).hasClass("switch")) {
+        $("i").empty();
+        $("i").text("keyboard_arrow_up");
         sort();
         console.log($(this).hasClass("switch"));
     }
     if (!$(this).hasClass("switch")) {
+        $("i").empty();
+        $("i").text("keyboard_arrow_down");
         sortbydesc();
         console.log($(this).hasClass("switch"));
     }
